@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: springboot-maven
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: springboot-maven
+  replicas: 2
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: springboot-maven
+    spec:
+      containers:
+      - name: springboot-maven
+        image: yusranadepratama/springweb:latest
+        ports:
+        - containerPort: 8080

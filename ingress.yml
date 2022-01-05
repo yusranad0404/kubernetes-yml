@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: springboot-svc
+spec:
+  rules:
+    - host: spring.adepratama.xyz
+      http:
+        paths:
+          - backend:
+              service:
+                name: springboot-maven
+                port:
+                  number: 8080
+            path: /welcome
+            pathType: Prefix
+  tls:
+    - hosts:
+        - spring.adepratama.xyz
+      secretName: cloudflare-adepratama.xyz
